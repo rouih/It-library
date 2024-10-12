@@ -13,7 +13,7 @@ export interface IBook extends Document {
 // Create the Mongoose schema for a Book
 const bookSchema = new Schema<IBook>(
   {
-    title: {type: String,required: true,trim: true,},
+    title: {type: String,required: true,trim: true,unique:true},
     author: {type: String,required: true,trim: true,},
     year: {type: Number,required: true,min: 1950}, // Basic validation to ensure year is a reasonable value},
     topic: {type: String,required: true,},

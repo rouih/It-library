@@ -1,7 +1,7 @@
 import { IBookService } from "./book-service.interface";
 import { IBookRepository,BookRepository } from "../../repositories/book/book-repository-index";
 import { BookDTO } from "../../dtos/book.dto";
-import { SearchTypeQuery } from "src/types/search.type";
+import { SearchQueryType } from "src/types/search.type";
 
 export class BookService implements IBookService {
   private bookRepository: IBookRepository;
@@ -9,7 +9,7 @@ export class BookService implements IBookService {
   constructor() {
     this.bookRepository = new BookRepository();
   }
-  async searchBook(queryParams: SearchTypeQuery): Promise<BookDTO[]> {
+  async searchBook(queryParams: SearchQueryType): Promise<BookDTO[]> {
     return await this.bookRepository.searchBook(queryParams);
   }
 

@@ -1,4 +1,4 @@
-import { SearchTypeQuery } from "src/types/search.type";
+import { SearchQueryType } from "src/types/search.type";
 import { BookDTO } from "../../dtos/book.dto";
 
 export interface IBookRepository {
@@ -7,5 +7,5 @@ export interface IBookRepository {
   createBook(book: BookDTO): Promise<BookDTO>;
   updateBook(id: string, book: Partial<BookDTO>): Promise<BookDTO | null>;
   deleteBook(id: string): Promise<void>;
-  searchBook(queryParams: SearchTypeQuery): Promise<BookDTO[]>;
+  searchBook(queryParams: SearchQueryType): Promise<BookDTO[]>;
 }

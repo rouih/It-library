@@ -1,0 +1,51 @@
+{
+  "name": "it-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1",
+    "nodemon": "^3.1.7",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0",
+    "winston": "^3.15.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node ./app.ts",
+    "dev": "nodemon ./app.ts",
+    "seed-db": "ts-node ./seed-db.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rouih/It-library.git"
+  },
+  "author": "Itay Hatzuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rouih/It-library/issues"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "arrowParens": "always"
+  },
+  "homepage": "https://github.com/rouih/It-library#readme"
+}

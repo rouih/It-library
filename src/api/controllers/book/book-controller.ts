@@ -16,7 +16,7 @@ export class BookController implements IBookController {
     try{
       const query = req.query;
       if(query){
-        const books = await this.bookService.searchBook(query);
+        const books = this.bookService.searchBook(query);
         res.status(200).json(books);
       }
     }catch(error){

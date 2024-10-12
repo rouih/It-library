@@ -12,7 +12,7 @@ export class BookRepository implements IBookRepository {
     return await BookModel.find().lean();
   }
 
-  async getBookById(id: string): Promise<BookDTO | null> {
+  async getBookById(id: string): Promise<BookDTO> {
     return await BookModel.findById(id).lean();
   }
 
@@ -21,10 +21,7 @@ export class BookRepository implements IBookRepository {
     return await newBook.save();
   }
 
-  async updateBook(
-    id: string,
-    book: Partial<BookDTO>
-  ): Promise<BookDTO | null> {
+  async updateBook(id: string,book: Partial<BookDTO>):Promise<BookDTO> {
     return await BookModel.findByIdAndUpdate(id, book, { new: true }).lean();
   }
 

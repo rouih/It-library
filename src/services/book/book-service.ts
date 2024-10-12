@@ -1,15 +1,16 @@
 import { IBookService } from "./book-service.interface";
-import {
-  IBookRepository,
-  BookRepository,
-} from "../../repositories/book/book-repository-index";
+import { IBookRepository,BookRepository } from "../../repositories/book/book-repository-index";
 import { BookDTO } from "../../dtos/book.dto";
+import { SearchTypeQuery } from "src/types/search.type";
 
 export class BookService implements IBookService {
   private bookRepository: IBookRepository;
 
   constructor() {
-    this.bookRepository = new BookRepository(); // Simple instantiation
+    this.bookRepository = new BookRepository();
+  }
+  async searchBook(queryParams: SearchTypeQuery): Promise<BookDTO[]> {
+    return await this.bookRepository.searchBook(queryParams);
   }
 
   async getAllBooks(): Promise<BookDTO[]> {

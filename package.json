@@ -12,6 +12,7 @@
     "nodemon": "^3.1.7",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.8.0",
+    "winston": "^3.15.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -22,9 +23,9 @@
   },
   "scripts": {
     "test": "test",
-    "start": "node ./src/app.ts",
-    "dev": "nodemon ./src/app.ts",
-    "seed-db": "ts-node ./src/seed-db.ts"
+    "start": "node ./app.ts",
+    "dev": "nodemon ./app.ts",
+    "seed-db": "ts-node ./seed-db.ts"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,17 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rouih/It-library/issues"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "arrowParens": "always"
   },
   "homepage": "https://github.com/rouih/It-library#readme"
 }

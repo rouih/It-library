@@ -3,6 +3,7 @@ import { IBookController } from "./book-controller.interface";
 import { BookService } from "../../../services/book/book-service-index";
 import { validate } from "class-validator";
 import { BookDTO } from "../../../dtos/book.dto";
+import logger from "../../../utils/winston-logger";
 
 export class BookController implements IBookController {
   private bookService: BookService;
@@ -10,12 +11,20 @@ export class BookController implements IBookController {
   constructor() {
     this.bookService = new BookService(); // Simple instantiation
   }
+  async searchBook(req: Request, res: Response, next: NextFunction): Promise<void> {
+    logger.info("User requested to search book")
+    try{
+      const query = req.query;
+      if(query){
+        const books = await this.bookService.searchBook(query);
+        res.status(200).json(books);
+      }
+    }catch(error){
+      next(error)
+    }
+  }
 
-  async getBooks(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async getBooks(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
       const books = await this.bookService.getAllBooks();
       res.status(200).json(books);
@@ -24,13 +33,9 @@ export class BookController implements IBookController {
     }
   }
 
-  async getBookById(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async getBookById(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
-      console.log("user requested books/id");
+      logger.info("user requested books/id");
       const { id } = req.params;
       const book = await this.bookService.getBookById(id);
       if (!book) {
@@ -43,11 +48,7 @@ export class BookController implements IBookController {
     }
   }
 
-  async createBook(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async createBook(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
       const bookData = Object.assign(new BookDTO(), req.body);
       const errors = await validate(bookData);
@@ -63,11 +64,7 @@ export class BookController implements IBookController {
     }
   }
 
-  async updateBook(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async updateBook(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
       const updatedBook = await this.bookService.updateBook(id, req.body);
@@ -81,11 +78,7 @@ export class BookController implements IBookController {
     }
   }
 
-  async deleteBook(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async deleteBook(req: Request,res: Response,next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
       await this.bookService.deleteBook(id);

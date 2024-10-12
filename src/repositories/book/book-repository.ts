@@ -1,8 +1,11 @@
+import 'reflect-metadata'
 import { IBookRepository } from "./book-repository.interface";
 import { BookDTO } from "../../dtos/book.dto";
 import BookModel from "../../models/book.model"; // Assuming you have a Mongoose model for books
 import { SearchQueryType } from "src/types/search.type";
+import { injectable } from 'tsyringe';
 
+@injectable()
 export class BookRepository implements IBookRepository {
   async searchBook(queryParams: SearchQueryType): Promise<BookDTO[]> {
     const queryResult = await BookModel.find(queryParams).lean();

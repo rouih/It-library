@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { IBookController } from "./book-controller.interface";
-import { BookService } from "../../../services/book/book-service-index";
+import { IBookService } from "../../../services/book/book-service-index";
 import { validate } from "class-validator";
 import { BookDTO } from "../../../dtos/book.dto";
 import logger from "../../../utils/winston-logger";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class BookController implements IBookController {
-  private bookService: BookService;
 
-  constructor() {
-    this.bookService = new BookService(); // Simple instantiation
+  constructor(@inject('IBookService') private bookService: IBookService) {
   }
   async searchBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     logger.info("User requested to search book")

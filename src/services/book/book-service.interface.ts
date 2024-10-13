@@ -1,11 +1,11 @@
 import { SearchQueryType } from "src/types/search.type";
-import { BookDTO } from "../../dtos/book.dto";
+import { BookDto, CreateBookDto, UpdateBookDto } from "../../dtos/book.dto";
 
 export interface IBookService {
-  getAllBooks(): Promise<BookDTO[]>;
-  getBookById(id: string): Promise<BookDTO | null>;
-  createBook(book: BookDTO): Promise<BookDTO>;
-  updateBook(id: string, book: Partial<BookDTO>): Promise<BookDTO | null>;
-  deleteBook(id: string): Promise<void>;
-  searchBook(query: SearchQueryType): Promise<BookDTO[]>;
+  getAllBooks(): Promise<BookDto[]>;
+  getBookByTitle(title: string): Promise<BookDto>;
+  createBook(book: CreateBookDto): Promise<BookDto>;
+  updateBookByTitle(title: string, updateData: UpdateBookDto): Promise<BookDto>;
+  deleteBook(title: string): Promise<void>;
+  searchBook(query: SearchQueryType): Promise<BookDto[]>;
 }

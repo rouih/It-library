@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { BookController } from "../controllers/book/book-controller-index";
+import {container} from '../../../container.config';
 
 const router = Router();
-const bookController = new BookController();
+
+const bookController = container.resolve(BookController);
 
 router.get("/", (req, res, next) => bookController.getBooks(req, res, next));
 router.get("/search", (req, res, next) => bookController.searchBook(req, res, next));

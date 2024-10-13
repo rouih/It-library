@@ -1,30 +1,30 @@
 import { Request, Response, NextFunction } from "express";
 import { IBookController } from "./book-controller.interface";
-import { BookService } from "../../../services/book/book-service-index";
+import { IBookService } from "../../../services/book/book-service-index";
 import { validate } from "class-validator";
-import { BookDTO } from "../../../dtos/book.dto";
+import { BookDto } from "../../../dtos/book.dto";
 import logger from "../../../utils/winston-logger";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class BookController implements IBookController {
-  private bookService: BookService;
 
-  constructor() {
-    this.bookService = new BookService(); // Simple instantiation
+  constructor(@inject('IBookService') private bookService: IBookService) {
   }
   async searchBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     logger.info("User requested to search book")
-    try{
+    try {
       const query = req.query;
-      if(query){
-        const books = await this.bookService.searchBook(query);
+      if (query) {
+        const books = this.bookService.searchBook(query);
         res.status(200).json(books);
       }
-    }catch(error){
+    } catch (error) {
       next(error)
     }
   }
 
-  async getBooks(req: Request,res: Response,next: NextFunction): Promise<void> {
+  async getBooks(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const books = await this.bookService.getAllBooks();
       res.status(200).json(books);
@@ -33,11 +33,11 @@ export class BookController implements IBookController {
     }
   }
 
-  async getBookById(req: Request,res: Response,next: NextFunction): Promise<void> {
+  async getBookById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       logger.info("user requested books/id");
       const { id } = req.params;
-      const book = await this.bookService.getBookById(id);
+      const book = await this.bookService.getBookByTitle(id);
       if (!book) {
         res.status(404).json({ message: "Book not found" });
       } else {
@@ -48,9 +48,9 @@ export class BookController implements IBookController {
     }
   }
 
-  async createBook(req: Request,res: Response,next: NextFunction): Promise<void> {
+  async createBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const bookData = Object.assign(new BookDTO(), req.body);
+      const bookData = Object.assign(new BookDto(), req.body);
       const errors = await validate(bookData);
 
       if (errors.length > 0) {
@@ -64,10 +64,10 @@ export class BookController implements IBookController {
     }
   }
 
-  async updateBook(req: Request,res: Response,next: NextFunction): Promise<void> {
+  async updateBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      const updatedBook = await this.bookService.updateBook(id, req.body);
+      const updatedBook = await this.bookService.updateBookByTitle(id, req.body);
       if (!updatedBook) {
         res.status(404).json({ message: "Book not found" });
       } else {
@@ -78,7 +78,7 @@ export class BookController implements IBookController {
     }
   }
 
-  async deleteBook(req: Request,res: Response,next: NextFunction): Promise<void> {
+  async deleteBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
       await this.bookService.deleteBook(id);

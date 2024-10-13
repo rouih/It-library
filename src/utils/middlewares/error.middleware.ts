@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import logger from "./winston-logger";
+import logger from "../winston-logger";
 // Custom error-handling middleware
 export function errorHandler(err: any,req: Request,res: Response,next: NextFunction): void {
   logger.error(err.stack);

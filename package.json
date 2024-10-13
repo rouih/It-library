@@ -26,10 +26,10 @@
     "typescript": "^5.6.3"
   },
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "start": "node ./app.ts",
     "dev": "nodemon ./app.ts",
-    "seed-db": "ts-node ./seed-db.ts"
+    "seed-db": "ts-node ./src/seed-db.ts"
   },
   "repository": {
     "type": "git",

@@ -7,7 +7,7 @@ import {
   IsBoolean,
 } from "class-validator";
 
-export class CreateBookDTO {
+export class CreateBookDto {
   @IsString()
   @IsNotEmpty()
   title!: string;
@@ -33,11 +33,7 @@ export class CreateBookDTO {
   available?: boolean;
 }
 
-export class UpdateBookDTO {
-  @IsString()
-  @IsNotEmpty()
-  title!: string;
-
+export class UpdateBookDto {
   @IsString()
   @IsNotEmpty()
   author?: string;
@@ -59,7 +55,7 @@ export class UpdateBookDTO {
   available?: boolean;
 }
 
-export class BookDTO {
+export class BookDto {
   @IsString()
   @IsNotEmpty()
   title!: string;

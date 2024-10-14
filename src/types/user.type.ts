@@ -1,7 +1,14 @@
+import { BookType } from "./book.type";
+
 export type UserType = {
-    id:string;
-    username:string;
-    password:string;
-    role:'Customer'| 'Employee'
-    loanedBooks: string[];
+    userId: string;
+    password: string;
+    role: UserRole
+    loanedBooks: BookType[];
+    token?: string
+}
+
+export enum UserRole {
+    CUSTOMER = "customer",
+    EMPLOYEE = "employee"
 }

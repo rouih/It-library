@@ -1,9 +1,11 @@
-import { createUserDto, UpdateUserDto, UserDto } from "../../dtos/user.dto";
+import { UserType } from "src/types/user.type";
+import { CreateUserDto, CreateUserResponseDto, UpdateUserDto, UserResponseDto } from "../../dtos/user.dto";
 
 
 export interface IUserService {
-    getUserById(personalId: string): Promise<UserDto>;
-    createUser(user: createUserDto): Promise<UserDto>;
-    updateUser(user: UpdateUserDto): Promise<UserDto>;
-    deleteUser(personalId: string): Promise<void>;
+    getUserById(id: string): Promise<UserType>;
+    createUser(user: CreateUserDto): Promise<CreateUserResponseDto>;
+    updateUser(id: string, user: UpdateUserDto): Promise<UserType>;
+    deleteUser(id: string): Promise<void>;
+    getAllUsers(): Promise<UserType[]>;
 }

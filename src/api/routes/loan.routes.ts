@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { container } from '../../../container.config';
+import { container } from '../../config/container.config';
 import { LoanController } from "../controllers/loan/loan-controller-index";
 const router = Router();
 

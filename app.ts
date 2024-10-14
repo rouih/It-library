@@ -4,11 +4,13 @@ import router from "./src/api/routes/routes-index";
 import initMongoInstance from "./src/mongoose.config";
 import logger from "./src/utils/winston-logger";
 import { errorHandler } from "./src/utils/middlewares/error.middleware";
+import passport from "./src/utils/middlewares/passport.config";
 
 
 
 const app = express();
 app.use(express.json());
+app.use(passport.initialize())
 app.use("/", router);
 app.use(errorHandler)
 initMongoInstance();

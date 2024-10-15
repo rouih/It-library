@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, MinLength, IsNotEmpty, IsEnum, IsIdentityCard } from "class-validator";
+import { IsString, IsEmail, IsOptional, MinLength, IsNotEmpty, IsEnum, IsIdentityCard, isNotEmpty } from "class-validator";
 import { UserRole } from "../types/user.type";
 import { BookDto } from "./book.dto";
 
@@ -29,8 +29,13 @@ export class LoginUserDto {
 }
 
 export class CreateUserDto {
+
     @IsString()
-    @IsNotEmpty({ message: 'id is required' })
+    @IsNotEmpty({ message: 'username is requiered' })
+    username!: string
+
+    @IsString()
+    @IsNotEmpty({ message: 'id is requiered' })
     userId!: string;
 
     @IsString()

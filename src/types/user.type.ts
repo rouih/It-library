@@ -1,6 +1,7 @@
 import { BookType } from "./book.type";
 
 export type UserType = {
+    username: string;
     userId: string;
     password: string;
     role: UserRole

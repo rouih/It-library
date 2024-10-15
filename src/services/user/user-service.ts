@@ -16,14 +16,14 @@ export class UserService implements IUserService {
         @inject("IUserRepository") private userRepository: IUserRepository) { }
 
     async createUser(user: UserType): Promise<CreateUserResponseDto> {
-        const { userId, password } = user;
+        const { username,userId, password } = user;
         const isUserExist = await this.userRepository.getUserById(userId);
 
         if (isUserExist) {
             throw new Error("User already exists");
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newRegisterdUser = await this.userRepository.createUser({ userId, password: hashedPassword, role: user.role });
+        const newRegisterdUser = await this.userRepository.createUser({ username,userId, password: hashedPassword, role: user.role });
         return new CreateUserResponseDto({
             userId: newRegisterdUser.userId,
             token: this.generateToken(newRegisterdUser.userId)

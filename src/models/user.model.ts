@@ -1,9 +1,10 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { BookType } from "src/types/book.type";
-import { UserRole } from "src/types/user.type";
+import { BookType } from "../types/book.type";
+import { UserRole } from "../types/user.type";
 const passportLocalMongoose = require('passport-local-mongoose');
 
 export interface IUser extends Document {
+    username: string
     userId: string;
     password: string;
     role: UserRole
@@ -11,6 +12,7 @@ export interface IUser extends Document {
 }
 
 const userSchema = new Schema<IUser>({
+    username: {type: String, required: true, unique:true},
     userId: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },

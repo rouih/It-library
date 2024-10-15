@@ -14,11 +14,11 @@ export class UserRepository implements IUserRepository {
     }
 
     async updateUser(userId: string, updateData: Partial<UserType>): Promise<UserType> {
-        return UserModel.findByIdAndUpdate(userId, updateData, { new: true }).lean().exec();
+        return UserModel.findOneAndDelete({ userId, updateData }, { new: true }).lean().exec();
     }
 
     async deleteUser(userId: string): Promise<UserType> {
-        return UserModel.findByIdAndDelete(userId).lean().exec();
+        return UserModel.findOneAndDelete({ userId }).lean().exec();
     }
 
     async getUserById(userId: string): Promise<UserType> {

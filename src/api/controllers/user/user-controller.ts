@@ -49,9 +49,9 @@ export class UserController implements IUserController {
 
     async deleteUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const { userId } = req.params;
-            await this.userService.deleteUser(userId);
-            res.status(204).send();
+            const { id } = req.params;
+            await this.userService.deleteUser(id);
+            res.status(204).send(`Deleted user ${id}`);
         } catch (error) {
             next(error);
         }

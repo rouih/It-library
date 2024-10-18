@@ -56,6 +56,10 @@ export class UpdateBookDto {
 }
 
 export class BookDto {
+
+  @IsString()
+  id?: string;
+
   @IsString()
   @IsNotEmpty()
   title!: string;

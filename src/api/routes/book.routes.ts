@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { BookController } from "../controllers/book/book-controller-index";
-import {container} from '../../../container.config';
+import { container } from '../../config/container.config';
 
 const router = Router();
 

@@ -8,10 +8,22 @@ import { CreateUserDto } from "../../../src/dtos/user.dto";
 export class UserRepository implements IUserRepository {
     constructor() { }
 
-    async createUser(userData: Partial<CreateUserDto>): Promise<UserType> {
-        const user = new UserModel(userData);
-        return user.save();
+    async createUser(userId: string, username: string, password: string, role: string): Promise<UserType> {
+        return new Promise((resolve, reject) => {
+            UserModel.register(
+                new UserModel({ userId: userId, username: username, password: password, role: role }), password,
+                (err, user) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(user);
+                    }
+                }
+            );
+        });
     }
+
+
 
     async updateUser(userId: string, updateData: Partial<UserType>): Promise<UserType> {
         return UserModel.findOneAndDelete({ userId, updateData }, { new: true }).lean().exec();

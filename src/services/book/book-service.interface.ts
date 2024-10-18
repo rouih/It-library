@@ -1,6 +1,5 @@
-import { SearchQueryType } from "src/types/search.type";
+import { SearchQueryType } from "../../types/search.type";
 import { BookDto, CreateBookDto, UpdateBookDto } from "../../dtos/book.dto";
-import { BookType } from "src/types/book.type";
 
 export interface IBookService {
   getAllBooks(): Promise<BookDto[]>;

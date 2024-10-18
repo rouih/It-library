@@ -4,6 +4,9 @@ import { IUserRepository } from "../../repositories/user/user-repository-index";
 import { UserType } from "../../types/user.type";
 import { CreateUserResponseDto, UserResponseDto } from "../../dtos/user.dto";
 import jwt from "jsonwebtoken";
+import { passport } from "../../utils/middlewares/passport.config";
+import { RequestWithUser } from "../../types/express";
+import { NextFunction, Response } from "express";
 
 
 let bcrypt = require('bcrypt')
@@ -12,18 +15,32 @@ let bcrypt = require('bcrypt')
 export class UserService implements IUserService {
     private readonly JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";
 
-    constructor(
-        @inject("IUserRepository") private userRepository: IUserRepository) { }
+    constructor(@inject("IUserRepository") private userRepository: IUserRepository) { }
 
-    async createUser(user: UserType): Promise<CreateUserResponseDto> {
-        const { username,userId, password } = user;
+    async loginUser(req: RequestWithUser): Promise<string> {
+        return new Promise((resolve, reject) => {
+            passport.authenticate("local", { session: false }, (err, user, info) => {
+                if (err || !user) {
+                    return reject(new Error("Unauthorized: Invalid Credentials"));
+                }
+                req.logIn(user, { session: false }, (err) => {
+                    if (err) {
+                        return reject(new Error("Unauthorized: Invalid Credentials"));
+                    }
+                    const token = this.generateToken(user.userId);
+                    return resolve(token);
+                });
+            })(req, req.res as Response, req.next as NextFunction);
+        });
+    }
+
+    async createUser(username: string, userId: string, password: string, role: string): Promise<CreateUserResponseDto> {
         const isUserExist = await this.userRepository.getUserById(userId);
 
         if (isUserExist) {
             throw new Error("User already exists");
         }
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newRegisterdUser = await this.userRepository.createUser({ username,userId, password: hashedPassword, role: user.role });
+        const newRegisterdUser = await this.userRepository.createUser(userId, username, password, role);
         return new CreateUserResponseDto({
             userId: newRegisterdUser.userId,
             token: this.generateToken(newRegisterdUser.userId)

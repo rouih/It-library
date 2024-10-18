@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { IBookService } from "./book-service.interface";
 import { IBookRepository, BookRepository } from "../../repositories/book/book-repository-index";
 import { BookDto, CreateBookDto, UpdateBookDto } from "../../dtos/book.dto";
-import { SearchQueryType } from "src/types/search.type";
+import { SearchQueryType } from "../../types/search.type";
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

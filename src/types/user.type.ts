@@ -1,11 +1,11 @@
-import { BookType } from "./book.type";
+import mongoose, { mongo } from "mongoose";
+import { BookType, LoanBookType } from "./book.type";
 
 export type UserType = {
     username: string;
     userId: string;
-    password: string;
     role: UserRole
-    loanedBooks: BookType[];
+    loan?: mongoose.Types.ObjectId;
     token?: string
 }
 

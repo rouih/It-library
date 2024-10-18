@@ -7,7 +7,7 @@ import { ILoanRepository } from '../../repositories/loan/loan-repository.interfa
 import { IBookService } from '../book/book-service-index';
 import logger from '../../utils/winston-logger';
 import { LOAN_MAX_BOOKS, LOAN_PERIODS } from '../../config/loans-metadata.config';
-import { LoanBookType } from 'src/types/book.type';
+import { LoanBookType } from '../../types/book.type';
 @injectable()
 export class LoanService implements ILoanService {
     constructor(@inject('ILoanRepository') private loanRepository: ILoanRepository, @inject("IBookService") private bookService: IBookService) {

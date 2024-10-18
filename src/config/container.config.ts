@@ -11,19 +11,19 @@ import { IUserService, UserService } from "../services/user/user-service-index";
 import { IUserController, UserController } from "../api/controllers/user/user-controller-index";
 
 // Register repositories
+container.registerSingleton<IUserRepository>("IUserRepository", UserRepository);
 container.registerSingleton<IBookRepository>("IBookRepository", BookRepository);
 container.registerSingleton<ILoanRepository>("ILoanRepository", LoanRepository);
-container.registerSingleton<IUserRepository>("IUserRepository", UserRepository);
 
 // Register Services
+container.registerSingleton<IUserService>("IUserService", UserService);
 container.registerSingleton<IBookService>("IBookService", BookService);
 container.registerSingleton<ILoanService>("ILoanService", LoanService);
-container.registerSingleton<IUserService>("IUserService", UserService);
 
 // Register controllers
+container.registerSingleton<IUserController>("IUserController", UserController);
 container.registerSingleton<IBookController>("IBookController", BookController);
 container.registerSingleton<ILoanController>("ILoanController", LoanController);
-container.registerSingleton<IUserController>("IUserController", UserController);
 
 
 

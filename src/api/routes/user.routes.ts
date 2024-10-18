@@ -15,6 +15,7 @@ router.delete("/:id", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, re
 router.put("/:id", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, next) => userController.updateUser(req, res, next));
 
 //Common routs
+router.get("/login", (req, res, next) => userController.loginUser(req, res, next));
 router.get("/", authMiddleware, (req, res, next) => userController.getAllUsers(req, res, next));
 router.get("/:id", authMiddleware, (req, res, next) => userController.getUserById(req, res, next));
 

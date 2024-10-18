@@ -3,15 +3,29 @@ import { IUserController } from "../../controllers/user/user-controller-index";
 import { IUserService } from "../../../services/user/user-service-index";
 import { Request, Response, NextFunction } from "express";
 import { CreateUserDto, UpdateUserDto } from "../../../dtos/user.dto";
+import { RequestWithUser } from "../../../types/express";
+import logger from "../../../utils/winston-logger";
 
 @injectable()
 export class UserController implements IUserController {
     constructor(@inject("IUserService") private userService: IUserService) { }
 
+    async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            logger.info("User requested to login");
+            const token = await this.userService.loginUser(req);
+            logger.info("User logged in successfully");
+            res.status(200).json({ token });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
     async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const user: CreateUserDto = req.body;
-            const createdUser = await this.userService.createUser(user);
+            const { username, userId, password, role } = req.body;
+            const createdUser = await this.userService.createUser(username, userId, password, role);
             res.status(201).json(createdUser);
         } catch (error) {
             next(error);

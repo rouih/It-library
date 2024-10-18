@@ -11,7 +11,7 @@ const loanController = container.resolve(LoanController);
 router.post("/", validateDto(CreateLoanDto), async (req, res, next) => loanController.loanBook(req, res, next));
 
 router.post("/return", validateDto(ReturnLoanDto), (req, res, next) => loanController.returnBook(req, res, next));
-router.get("/loaned", (req, res, next) => loanController.getLoanedBooks(req, res, next));
-router.get("/loans", (req, res, next) => loanController.getAllLoans(req, res, next));
+router.get("/:id", (req, res, next) => loanController.getLoansByUser(req, res, next));
+router.get("/allLoans", (req, res, next) => loanController.getAllLoans(req, res, next));
 
 export default router;

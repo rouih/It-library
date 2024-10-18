@@ -44,8 +44,15 @@ export class LoanRepository implements ILoanRepository {
     }
 
     async getLoanByUserId(userID: string): Promise<ILoan | null> {
-        // Convert userID to ObjectId
         return await LoanModel.findOne({ userID }).populate('loanedBooks.book').exec();
+    }
+
+    async getAllBooksLoanedByUser(userID: string): Promise<ILoan[]> {
+        return await LoanModel.find({ userID }).populate('loanedBooks.book').exec();
+    }
+
+    async getAllLoansOfUser(userID: string): Promise<ILoan[]> {
+        return await LoanModel.find({ userID }).populate('loanedBooks.book').exec();
     }
 
     async getLoanById(loanID: string): Promise<ILoan | null> {

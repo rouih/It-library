@@ -29,31 +29,20 @@ export class LoanController implements ILoanController {
             const query = req.body;
             if (query) {
                 const { loanId, bookId } = query;
-                const loan = await this.loanService.returnBook(bookId, loanId);
-                res.status(200).json(loan);
-            }
-        } catch (error) {
-            next(error);
-        }
-    }
-    async getLoanedBooks(req: any, res: any, next: any): Promise<void> {
-        logger.info("Get loaned books request received");
-        try {
-            const query = req.body;
-            if (query) {
-                const loan = await this.loanService.getLoanedBooksByUser(req.body);
-                res.status(200).json(loan);
+                await this.loanService.returnBook(bookId, loanId);
+                logger.info("Book returned successfully");
+                res.status(200);
             }
         } catch (error) {
             next(error);
         }
     }
     async getLoansByUser(req: any, res: any, next: any): Promise<void> {
-        logger.info("Get loans by user request received");
+        logger.info("Get loaned books request received");
         try {
-            const query = req.body;
-            if (query) {
-                const loan = await this.loanService.getLoanedBooksByUser(req.body);
+            const { id } = req.params;
+            if (id) {
+                const loan = await this.loanService.getLoanedBooksByUser(id);
                 res.status(200).json(loan);
             }
         } catch (error) {

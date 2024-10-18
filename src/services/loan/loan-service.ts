@@ -54,15 +54,15 @@ export class LoanService implements ILoanService {
     }
 
     async returnBook(bookId: string, loanID: string): Promise<void> {
-        await this.loanRepository.returnBook(loanID, bookId);
-
-        // Mark the book as available again
-        await this.bookService.updateBookLoanStatus(bookId, true);
+        Promise.all([
+            this.loanRepository.returnBook(loanID, bookId),
+            this.bookService.updateBookLoanStatus(bookId, true)
+        ]);
     }
     async getLoanedBooksByUser(userId: string): Promise<ILoan[]> {
-        throw new Error('Method not implemented.');
+        return await this.loanRepository.getAllBooksLoanedByUser(userId);
     }
     async getAllLoanedBooks(): Promise<ILoan[]> {
-        throw new Error('Method not implemented.');
+        return await this.loanRepository.getAllLoans();
     }
 }

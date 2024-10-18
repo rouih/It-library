@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { ILoan } from "../../models/loan.model";
 import { ILoanService } from "./loan-service.interface";
-import { CreateLoanDto, ReturnLoanDto } from "../../dtos/loan.dto";
+import { CreateLoanDto, ReturnBookDto } from "../../dtos/loan.dto";
 import { inject, injectable } from "tsyringe";
 import { ILoanRepository } from '../../repositories/loan/loan-repository.interface';
 import { IBookService } from '../book/book-service-index';
@@ -54,7 +54,7 @@ export class LoanService implements ILoanService {
     }
 
     async returnBook(bookId: string, loanID: string): Promise<void> {
-        Promise.all([
+        await Promise.all([
             this.loanRepository.returnBook(loanID, bookId),
             this.bookService.updateBookLoanStatus(bookId, true)
         ]);

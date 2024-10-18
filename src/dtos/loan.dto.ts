@@ -10,7 +10,7 @@ export class CreateLoanDto {
     bookIds: string[];
 }
 
-export class ReturnLoanDto {
+export class ReturnBookDto {
     @IsString()
     @IsNotEmpty()
     loanId: string;

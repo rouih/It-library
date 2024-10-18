@@ -60,6 +60,10 @@ export class BookRepository implements IBookRepository {
   }
 
   async deleteBook(id: string): Promise<void> {
-    await BookModel.findByIdAndDelete(id);
+    const isBookAvailable = await this.isBookAvailable(id);
+    if (!isBookAvailable) {
+      throw new Error("Book is not available to delete");
+    }
+    return await BookModel.findByIdAndDelete(id);
   }
 }

@@ -41,6 +41,6 @@ export class BookService implements IBookService {
   }
 
   async deleteBook(id: string): Promise<void> {
-    await this.bookRepository.deleteBook(id);
+    return await this.bookRepository.deleteBook(id);
   }
 }

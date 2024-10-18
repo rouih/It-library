@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { BookController } from "../controllers/book/book-controller-index";
 import { container } from '../../config/container.config';
+import { authMiddleware } from "../../utils/middlewares/auth.middleware";
+import { authorizeRole } from "../../utils/middlewares/roleAuth.middleware";
+import { roles } from "src/config/roles.config";
+import { UserRole } from "../../types/user.type";
 
 const router = Router();
 
@@ -13,7 +17,7 @@ router.get("/:id", (req, res, next) =>
 );
 
 router.post("/", (req, res, next) => bookController.createBook(req, res, next));
-router.put("/:id", (req, res, next) =>
+router.put("/:id", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, next) =>
   bookController.updateBook(req, res, next)
 );
 router.delete("/:id", (req, res, next) =>

@@ -31,7 +31,7 @@ export class LoanController implements ILoanController {
                 const { loanId, bookId } = query;
                 await this.loanService.returnBook(bookId, loanId);
                 logger.info("Book returned successfully");
-                res.status(200);
+                res.status(200).json({ message: "Book returned successfully" });
             }
         } catch (error) {
             next(error);

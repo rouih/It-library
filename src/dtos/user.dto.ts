@@ -15,7 +15,7 @@ export class UpdateUserDto {
     password?: string;
 
     @IsOptional()
-    role?: UserRole;  // Allow role update if necessary (for example, an admin might change a user's role)
+    role?: UserRole;
 }
 
 export class LoginUserDto {
@@ -53,6 +53,8 @@ export class CreateUserDto {
 }
 
 export class CreateUserResponseDto {
+    @IsString()
+    @IsNotEmpty({ message: 'id is requiered' })
     userId!: string;
     token?: string;
     constructor(partial: Partial<CreateUserResponseDto>) {
@@ -61,6 +63,8 @@ export class CreateUserResponseDto {
 }
 
 export class UserResponseDto {
+    @IsString()
+    @IsNotEmpty({ message: 'id is requiered' })
     userId!: string;
     role!: UserRole;
     createdAt!: Date;

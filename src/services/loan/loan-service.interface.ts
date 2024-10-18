@@ -1,9 +1,9 @@
-import { CreateLoanBookDto, ReturnBookDto } from 'src/dtos/loan.dto';
+import { CreateLoanDto, ReturnLoanDto } from '../../dtos/loan.dto';
 import { ILoan } from '../../models/loan.model';
 
 export interface ILoanService {
-  createLoan(createBookDto: CreateLoanBookDto): Promise<ILoan>;
-  returnBook(returnBookDto: ReturnBookDto): Promise<void>;
+  createLoan(userID: string, bookIds: string[]): Promise<ILoan>;
+  returnBook(bookId: string, loanID: string): Promise<void>;
   getLoanedBooksByUser(userId: string): Promise<ILoan[]>;
   getAllLoanedBooks(): Promise<ILoan[]>;
 }

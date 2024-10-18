@@ -6,3 +6,10 @@ export type BookType = {
     rating: number;
     available: boolean;
 }
+
+
+export type LoanBookType = {
+    bookId: string;
+    returnDate: Date;
+    actualReturnDate?: Date;
+}

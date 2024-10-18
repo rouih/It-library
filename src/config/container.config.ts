@@ -1,5 +1,4 @@
 
-import { ILoan } from "src/dtos/loan.dto";
 import { BookController, IBookController } from "../api/controllers/book/book-controller-index";
 import { BookRepository, IBookRepository } from "../repositories/book/book-repository-index";
 import { BookService, IBookService } from "../services/book/book-service-index";

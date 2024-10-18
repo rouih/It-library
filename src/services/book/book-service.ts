@@ -10,6 +10,16 @@ export class BookService implements IBookService {
 
   constructor(@inject('IBookRepository') private bookRepository: IBookRepository) {
   }
+  async getBookById(bookId: string): Promise<BookDto> {
+    return await this.bookRepository.getBookById(bookId);
+  }
+  async updateBookLoanStatus(bookId: string, isLoaned: boolean): Promise<void> {
+    return await this.bookRepository.updateBookLoanStatus(bookId, isLoaned)
+  }
+
+  async isBookAvailable(bookId: string): Promise<Boolean> {
+    return await this.bookRepository.isBookAvailable(bookId)
+  }
   async searchBook(queryParams: SearchQueryType): Promise<BookDto[]> {
     return await this.bookRepository.searchBook(queryParams);
   }
@@ -19,7 +29,7 @@ export class BookService implements IBookService {
   }
 
   async getBookByTitle(id: string): Promise<BookDto> {
-    return await this.bookRepository.getBookById(id);
+    return await this.bookRepository.getBookByTitle(id);
   }
 
   async createBook(book: CreateBookDto): Promise<BookDto> {

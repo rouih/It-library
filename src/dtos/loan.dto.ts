@@ -1,19 +1,23 @@
-export interface CreateLoanBookDto {
+import { IsString, IsArray, IsNotEmpty } from 'class-validator';
+
+export class CreateLoanDto {
+    @IsString()
+    @IsNotEmpty()
     userId: string;
-    bookTitle: string;
-    loanDate: Date;
-    returnDate: Date;
+
+    @IsArray()
+    @IsNotEmpty()
+    bookIds: string[];
 }
 
-export interface ReturnBookDto {
-    userId: string;
+export class ReturnLoanDto {
+    @IsString()
+    @IsNotEmpty()
+    loanId: string;
     bookId: string;
-    returnDate: Date;
 }
 
-export interface ILoan {
-    userId: string;
-    bookId: string;
-    loanDate: Date;
-    returnDate: Date;
+export class LoanResponseDto {
+    loanId!: string;
+    bookIds: string[];
 }

@@ -1,4 +1,4 @@
-import { CreateLoanDto, ReturnLoanDto } from '../../dtos/loan.dto';
+import { CreateLoanDto, ReturnBookDto } from '../../dtos/loan.dto';
 import { ILoan } from '../../models/loan.model';
 
 export interface ILoanService {

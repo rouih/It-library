@@ -39,8 +39,15 @@ export class BookRepository implements IBookRepository {
   }
 
   async searchBook(queryParams: SearchQueryType): Promise<BookDto[]> {
-    const queryResult = await BookModel.find(queryParams).lean();
-    return queryResult;
+    logger.info(`Searching for books with query ${JSON.stringify(queryParams)}`);
+    const { title, author, year } = queryParams;
+    const query: any = {};
+
+    if (title) query.title = title;
+    if (author) query.author = author;
+    if (year) query.year = year;
+
+    return await BookModel.find(query).lean();
   }
   async getAllBooks(): Promise<BookDto[]> {
     return await BookModel.find().lean();
@@ -60,6 +67,10 @@ export class BookRepository implements IBookRepository {
   }
 
   async deleteBook(id: string): Promise<void> {
-    await BookModel.findByIdAndDelete(id);
+    const isBookAvailable = await this.isBookAvailable(id);
+    if (!isBookAvailable) {
+      throw new Error("Book is not available to delete");
+    }
+    return await BookModel.findByIdAndDelete(id);
   }
 }

@@ -3,7 +3,6 @@ import { IUserController } from "../../controllers/user/user-controller-index";
 import { IUserService } from "../../../services/user/user-service-index";
 import { Request, Response, NextFunction } from "express";
 import { CreateUserDto, UpdateUserDto } from "../../../dtos/user.dto";
-import { RequestWithUser } from "../../../types/express";
 import logger from "../../../utils/winston-logger";
 
 @injectable()

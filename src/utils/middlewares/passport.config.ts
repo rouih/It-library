@@ -16,7 +16,8 @@ passport.use(new LocalStrategy(
 passport.use(
     new JwtStrategy(opts, async (jwtPayload, done) => {
         try {
-            const user = await UserModel.findById(jwtPayload.userId);
+            const userId = await UserModel.findOne({ userId: jwtPayload.userId }).exec();
+            const user = await UserModel.findById(userId);
             if (user) {
                 return done(null, user);
             } else {

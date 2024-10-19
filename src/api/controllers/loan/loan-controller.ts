@@ -31,7 +31,7 @@ export class LoanController implements ILoanController {
                 const { loanId, bookId } = query;
                 await this.loanService.returnBook(bookId, loanId);
                 logger.info("Book returned successfully");
-                res.status(200);
+                res.status(200).json({ message: "Book returned successfully" });
             }
         } catch (error) {
             next(error);
@@ -50,7 +50,7 @@ export class LoanController implements ILoanController {
         }
     }
     async getAllLoans(req: any, res: any, next: any): Promise<void> {
-        logger.info("Get All loans request received");
+        logger.info("Get All loanssss request received");
         try {
             const loans = await this.loanService.getAllLoanedBooks();
             res.status(200).json(loans);

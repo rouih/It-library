@@ -1,4 +1,5 @@
 import { IsString, IsArray, IsNotEmpty } from 'class-validator';
+import { BookDto } from './book.dto';
 
 export class CreateLoanDto {
     @IsString()
@@ -10,14 +11,37 @@ export class CreateLoanDto {
     bookIds: string[];
 }
 
-export class ReturnLoanDto {
+export class ReturnBookDto {
     @IsString()
     @IsNotEmpty()
     loanId: string;
     bookId: string;
 }
 
+export class ReturnBookDtoResponse {
+    @IsString()
+    @IsNotEmpty()
+    bookId: string;
+    message: string;
+}
+
+export class GetLoanByIdDto {
+    @IsString()
+    @IsNotEmpty()
+    loanId: string;
+}
+
 export class LoanResponseDto {
     loanId!: string;
-    bookIds: string[];
+    books: BookDto[];
+}
+
+export class GetAllLoansDto {
+    @IsString()
+    @IsNotEmpty()
+    userId: string;
+
+    @IsArray()
+    @IsNotEmpty()
+    loans: LoanResponseDto[];
 }

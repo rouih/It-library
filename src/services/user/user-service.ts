@@ -9,8 +9,6 @@ import { RequestWithUser } from "../../types/express";
 import { NextFunction, Response } from "express";
 
 
-let bcrypt = require('bcrypt')
-
 @injectable()
 export class UserService implements IUserService {
     private readonly JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";

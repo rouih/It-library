@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Compile TypeScript to JavaScript
-RUN npx tsc
+RUN npm run build
 
 # Expose the application port (adjust if needed)
 EXPOSE 3000

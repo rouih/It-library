@@ -1,6 +1,6 @@
-# TabIt-library
+# It-library
 
-# **TabIt Library Management System**
+# **It Library Management System**
 
 A backend application for managing a physical library, including books, users, and loans with role-based access control (RBAC) and authentication.
 

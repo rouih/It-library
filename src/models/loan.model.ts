@@ -1,6 +1,4 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
-import { IBook } from './book.model';
-import { IUser } from './user.model';
 
 
 interface LoanedBook {
@@ -13,7 +11,7 @@ interface LoanedBook {
 
 export interface ILoan extends Document {
   loanID: string;
-  userID: string; // Reference to the User model
+  userID: string;
   loanedBooks: LoanedBook[];
 }
 
@@ -30,6 +28,8 @@ const loanSchema = new Schema<ILoan>({
   loanedBooks: [loanedBookSchema],
 });
 
+loanSchema.index({ userID: 1, loanedBooks: 1 });
+loanSchema.index({ 'loanedBooks.book': 1 });
 
 const LoanModel = mongoose.model<ILoan>('Loan', loanSchema);
 export default LoanModel;

@@ -58,10 +58,20 @@ A backend application for managing a physical library, including books, users, a
 
 ## **API Routes**
 
-### **Auth**
+### **users**
 
-- **POST** `/auth/login`:  
+- **POST** `/users/login`:  
   Login to get a JWT token.
+
+- **POST** `/users`:  
+  Create a new user
+
+- **delete** `/users/:id`:  
+  Delete a user
+- **put** `/users/:id`:  
+  Update a user
+- **get** `/users`:
+  Get all users, employees only
 
 ---
 

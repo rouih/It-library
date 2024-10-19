@@ -54,11 +54,6 @@ export class BookController implements IBookController {
   async createBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const bookData = Object.assign(new BookDto(), req.body);
-      const errors = await validate(bookData);
-
-      if (errors.length > 0) {
-        res.status(400).json({ errors });
-      }
 
       const newBook = await this.bookService.createBook(bookData);
       res.status(201).json(newBook);

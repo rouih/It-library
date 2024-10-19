@@ -1,5 +1,4 @@
 import mongoose, { Document, mongo, Schema } from "mongoose";
-import { BookType } from "../types/book.type";
 import { UserRole } from "../types/user.type";
 import passportLocalMongoose from "passport-local-mongoose";
 
@@ -18,6 +17,8 @@ const userSchema = new Schema<IUser>({
 })
 
 userSchema.plugin(passportLocalMongoose);
+
+userSchema.index({ role: 1, userId: 1 });
 
 const UserModel = mongoose.model<IUser>("User", userSchema)
 

@@ -5,7 +5,7 @@ import { authMiddleware } from "../../utils/middlewares/auth.middleware";
 import { authorizeRole } from "../../utils/middlewares/roleAuth.middleware";
 import { UserRole } from "../../types/user.type";
 import { validateDto } from "../../utils/middlewares/dto-validator.middleware";
-import { SearchBookDto } from "../../dtos/book.dto";
+import { CreateBookDto, SearchBookDto } from "../../dtos/book.dto";
 
 const router = Router();
 
@@ -15,7 +15,7 @@ router.get("/", authMiddleware, (req, res, next) => bookController.getBooks(req,
 router.get("/search", authMiddleware, validateDto(SearchBookDto), (req, res, next) => bookController.searchBook(req, res, next));
 router.get("/:id", (req, res, next) => bookController.getBookById(req, res, next));
 
-router.post("/", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, next) => bookController.createBook(req, res, next));
+router.post("/", authMiddleware, authorizeRole(UserRole.EMPLOYEE), validateDto(CreateBookDto), (req, res, next) => bookController.createBook(req, res, next));
 router.put("/:id", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, next) => bookController.updateBook(req, res, next));
 router.delete("/:id", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, next) => bookController.deleteBook(req, res, next));
 export default router;

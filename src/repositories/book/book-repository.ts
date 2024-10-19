@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { IBookRepository } from "./book-repository.interface";
 import { BookDto } from "../../dtos/book.dto";
-import BookModel from "../../models/book.model"; // Assuming you have a Mongoose model for books
+import BookModel from "../../models/book.model";
 import { SearchQueryType } from "../../types/search.type";
 import { injectable } from 'tsyringe';
 import logger from '../../utils/winston-logger';

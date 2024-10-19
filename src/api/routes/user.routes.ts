@@ -18,7 +18,7 @@ router.put("/:id", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, 
 
 //Common routs
 router.get("/login", (req, res, next) => userController.loginUser(req, res, next));
-router.get("/", authMiddleware, (req, res, next) => userController.getAllUsers(req, res, next));
+router.get("/", authMiddleware, authorizeRole(UserRole.EMPLOYEE), (req, res, next) => userController.getAllUsers(req, res, next));
 router.get("/:id", authMiddleware, (req, res, next) => userController.getUserById(req, res, next));
 
 export default router;

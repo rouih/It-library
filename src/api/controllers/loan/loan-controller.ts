@@ -50,7 +50,7 @@ export class LoanController implements ILoanController {
         }
     }
     async getAllLoans(req: any, res: any, next: any): Promise<void> {
-        logger.info("Get All loanssss request received");
+        logger.info("Get All loans request received");
         try {
             const loans = await this.loanService.getAllLoanedBooks();
             res.status(200).json(loans);

@@ -5,7 +5,23 @@ import {
   Min,
   Max,
   IsBoolean,
+  IsOptional,
 } from "class-validator";
+
+export class SearchBookDto {
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  author?: string;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1000)
+  year?: number;
+}
 
 export class CreateBookDto {
   @IsString()
@@ -33,6 +49,25 @@ export class CreateBookDto {
   available?: boolean;
 }
 
+export class CreateBookDtoResponse {
+  @IsString()
+  @IsNotEmpty()
+  id!: string;
+}
+
+export class DeleteBookDto {
+  @IsString()
+  @IsNotEmpty()
+  id!: string;
+}
+
+export class DeleteBookDtoResponse {
+  @IsString()
+  @IsNotEmpty()
+  id!: string;
+  message!: string;
+}
+
 export class UpdateBookDto {
   @IsString()
   @IsNotEmpty()
@@ -53,6 +88,13 @@ export class UpdateBookDto {
 
   @IsBoolean()
   available?: boolean;
+}
+
+export class UpdateBookDtoResponse {
+  @IsString()
+  @IsNotEmpty()
+  id!: string;
+  message!: string;
 }
 
 export class BookDto {

@@ -74,3 +74,16 @@ export class UserResponseDto {
         Object.assign(this, partial);
     }
 }
+
+export class DeleteUserDto {
+    @IsString()
+    @IsNotEmpty({ message: 'id is requiered' })
+    userId!: string;
+}
+
+export class DeleteUserDtoResponse {
+    @IsString()
+    @IsNotEmpty({ message: 'id is requiered' })
+    userId!: string;
+    message!: string;
+}

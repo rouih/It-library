@@ -14,11 +14,14 @@ export class BookController implements IBookController {
   async searchBook(req: Request, res: Response, next: NextFunction): Promise<void> {
     logger.info("User requested to search book")
     try {
-      const query = req.query;
-      if (query) {
-        const books = this.bookService.searchBook(query);
-        res.status(200).json(books);
-      }
+      const { title, author, year } = req.body;
+      const books = await this.bookService.searchBook({
+        title: title as string,
+        author: author as string,
+        year: year ? Number(year) : undefined,
+      });
+      res.status(200).json(books);
+
     } catch (error) {
       next(error)
     }

@@ -1,12 +1,9 @@
-export default {
+module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'node',
-    testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
     moduleFileExtensions: ['ts', 'js'],
-    globals: {
-        'ts-jest': {
-            isolatedModules: true,
-        },
+    transform: {
+        '^.+\\.ts$': 'ts-jest',
     },
-    coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
+    testMatch: ['**/tests/**/*.test.ts']
 };

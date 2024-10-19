@@ -10,8 +10,8 @@ import { IBookService } from '../book-service.interface';
 
 describe('BookService', () => {
     let bookService: BookService;
-    let mockBookRepository: MockBookRepository
-    let mockBookService: MockBookService
+    let mockBookRepository: MockBookRepository;
+    let mockBookService: MockBookService;
 
     beforeAll(() => {
         mockBookRepository = new MockBookRepository();
